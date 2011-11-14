@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Accessory:</b>
+  <%= @outfit.accessory_id %>
+</p>
+
+<p>
+  <b>Top:</b>
+  <%= @outfit.top_id %>
+</p>
+
+<p>
+  <b>Bottom:</b>
+  <%= @outfit.bottom_id %>
+</p>
+
+<p>
+  <b>Shoes:</b>
+  <%= @outfit.shoes_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_outfit_path(@outfit) %> |
+<%= link_to 'Back', outfits_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@outfit) do |f| %>
+  <% if @outfit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@outfit.errors.count, "error") %> prohibited this outfit from being saved:</h2>
+
+      <ul>
+      <% @outfit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :accessory_id %><br />
+    <%= f.collection_select :accessory_id, current_user.items.find_all_by_category_id(Category.find_by_name('Accessory').id), :id, :description, :include_blank => "Select Category" %>
+  </div>
+  <div class="field">
+    <%= f.label :top_id %><br />
+    <%= f.collection_select :top_id, current_user.items.find_all_by_category_id(Category.find_by_name('Top').id), :id, :description, :include_blank => "Select Top" %>
+  </div>
+  <div class="field">
+    <%= f.label :bottom_id %><br />
+    <%= f.collection_select :bottom_id, current_user.items.find_all_by_category_id(Category.find_by_name('Bottom').id), :id, :description, :include_blank => "Select Bottom" %>
+  </div>
+  <div class="field">
+    <%= f.label :shoes_id %><br />
+    <%= f.collection_select :shoes_id, current_user.items.find_all_by_category_id(Category.find_by_name('Shoes').id), :id, :description, :include_blank => "Select Footwear" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

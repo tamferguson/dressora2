@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dressora</title>
+
+	<%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
+	<%= stylesheet_link_tag 'blueprint/print', :media => "print" %>
+	<!--[if lt IE8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif] -->
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+	<body>
+		
+	<div id="container">
+		<% if logged_in? %>
+			<h1><%= link_to "DRESSORA", user_url(current_user) %></h1>
+		<% else %>
+			<h1>DRESSORA</h1>	
+		<% end %>
+		 <% flash.each do |key, value| %>
+			<div class="flash <%= key %>"><%= value %></div>
+		<% end %>
+		 <% if logged_in? %>
+			<p>
+				Welcome <%= current_user.f_name %>! | 
+				<%=link_to "Sign Out", signout_url, :method => :delete %>
+			</p>
+		<% else %>
+			<p><%=link_to "Sign In", signin_url %></p>
+		<% end %>
+	<%= yield %></p>
+	</div>
+</body>
+</html>

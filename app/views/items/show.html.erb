@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @item.category.name %>
+</p>
+
+<p>
+  <b>Brand:</b>
+  <%= @item.brand %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @item.size %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @item.color %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= image_tag @item.image.url %>
+ <%= image_tag @item.image.url(:medium) %>
+ <%= image_tag @item.image.url(:thumb) %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
+

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  accessory_id: 1
+  top_id: 1
+  bottom_id: 1
+  shoes_id: 1
+
+two:
+  accessory_id: 1
+  top_id: 1
+  bottom_id: 1
+  shoes_id: 1
