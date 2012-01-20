@@ -1,0 +1,2 @@
+module EventsOutfitsHelper
+end

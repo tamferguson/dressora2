@@ -1,7 +1,9 @@
 Dressora::Application.routes.draw do
-  resources :requests
+  resources :events_outfits
 
-  resources :choices
+  resources :events
+
+  resources :requests
 
   root :to => "sessions#new"
   resources :outfits

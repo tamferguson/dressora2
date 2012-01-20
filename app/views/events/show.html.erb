@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @event.user_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @event.title %>
+</p>
+
+<p>
+  <b>Event datetime:</b>
+  <%= @event.event_datetime %>
+</p>
+
+<% @outfits.each do |outfit| %>
+<h2>Outfit</h2>
+	<p>
+	  <b>Accessory:</b>
+	 <%if outfit.accessory_id%>
+	 <%= image_tag Item.find(outfit.accessory_id).image.url(:thumb) %>
+	 <%end%>
+	</p>
+
+
+	<p>
+	  <b>Top:</b>
+	  <%if outfit.top_id%>
+	  <%= image_tag Item.find(outfit.top_id).image.url(:thumb) %>
+	  <%end%>
+	</p>
+
+	<p>
+	  <b>Bottom:</b>
+	  <%if outfit.bottom_id%>
+	  <%= image_tag Item.find(outfit.bottom_id).image.url(:thumb)%>
+	  <%end%>
+	</p>
+
+	<p>
+	  <b>Shoes:</b>
+	  <%if outfit.shoes_id%>
+	  <%= image_tag Item.find(outfit.shoes_id).image.url(:thumb)%>
+	  <%end%>
+	</p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

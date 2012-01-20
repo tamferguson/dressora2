@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ChoiceTest < ActiveSupport::TestCase
+class EventsOutfitTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
