@@ -1,12 +1,18 @@
 Dressora::Application.routes.draw do
+  resources :requests
+
+  resources :choices
+
   root :to => "sessions#new"
   resources :outfits
   resources :items
   resources :users
+  get "items/fb_response/:data", :controller => "items", :action => "fb_response"
   
-  get "sessions/new", :as => :signin
-  post "sessions/create"
-  delete "sessions/destroy",:as => :signout
+  get "sessions/new", :controller => "sessions", :action => "new", :as => :signin
+  post "sessions/create", :controller => "sessions", :action => "create"
+  #TODO Why isn't method delete working here?
+  get "sessions/destroy", :controller => "sessions", :action => "destroy", :as => :signout
   
   
 

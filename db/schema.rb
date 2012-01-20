@@ -10,10 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111013603) do
+ActiveRecord::Schema.define(:version => 20120120004959) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "choices", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "event_datetime"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +51,13 @@ ActiveRecord::Schema.define(:version => 20111111013603) do
     t.integer  "user_id"
   end
 
+  create_table "requests", :force => true do |t|
+    t.string   "fb_user_id"
+    t.integer  "choice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -57,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20111111013603) do
     t.boolean  "admin",           :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "fb_access_token"
+    t.integer  "fb_uid"
   end
 
 end

@@ -2,30 +2,75 @@
 <html>
 <head>
   <title>Dressora</title>
-
-	<%= stylesheet_link_tag 'blueprint/screen', :media => "screen, projection" %>
-	<%= stylesheet_link_tag 'blueprint/print', :media => "print" %>
-	<!--[if lt IE8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif] -->
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    "style" %>
+	
+  <%= javascript_include_tag "libs/selectivizr-min.js" %>
+  <%= javascript_include_tag "libs/modernizr-2.0.6.min.js" %>
+  <%= javascript_include_tag "libs/live.js#css" %>
   <%= csrf_meta_tags %>
 </head>
-	<body>
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) {return;}
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
+<body onload="coverflow.init()">
+	<div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '246025008796664',
+          status     : true, 
+          cookie     : true,
+          xfbml      : true
+        });
+		FB.getLoginStatus(function(response) {
+		  if (response.status === 'connected') {
+		    // the user is logged in and connected to your
+		    // app, and response.authResponse supplies
+		    // the user's ID, a valid access token, a signed
+		    // request, and the time the access token 
+		    // and signed request each expire
+		    var uid = response.authResponse.userID;
+		    var accessToken = response.authResponse.accessToken;
+			$.ajax({
+				url: '/items/fb_response/data',
+				data: { accessToken :accessToken, uid :uid }
+			});
+	 	
+		  } else if (response.status === 'not_authorized') {
+		    // the user is logged in to Facebook, 
+		    //but not connected to the app
+	
+		  } else {
+		    // the user isn't even logged in to Facebook.
+			$("div.facebook_login").show();
+		  }
+	 	});
+	  };
+      (function(d){
+         var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         d.getElementsByTagName('head')[0].appendChild(js);
+       }(document));
+    </script>
+	<div class="facebook_login" style="display: none">
+		<div class="fb-login-button">new Login with Facebook</div>
+	</div>
+
+	<div class="header_bar">
+		<div class="header_bar_nav">
+			<% if logged_in? %>
+				<%= link_to image_tag("/img/dressora-logo.png"), user_url(current_user)%>
+			<% else %>
+				<img src="img/dressora-logo.png" />	
+			<% end %>
+      		<!-- <img src="img/facebook-button.png" align="right" style="padding: 7px 0 0 0;" /> -->
+		</div>
+	</div>
+
+	<div id="main" role="main" class="border_guide clearfix">
+    	<div class="closet border_guide clearfix">
+					
 		
-	<div id="container">
-		<% if logged_in? %>
-			<h1><%= link_to "DRESSORA", user_url(current_user) %></h1>
-		<% else %>
-			<h1>DRESSORA</h1>	
-		<% end %>
+
+	
 		 <% flash.each do |key, value| %>
 			<div class="flash <%= key %>"><%= value %></div>
 		<% end %>
@@ -37,11 +82,42 @@
 		<% else %>
 			<p><%=link_to "Sign In", signin_url %></p>
 		<% end %>
-			<div class="fb-like" data-href="http://www.facebook.com/pages/Dressora/261360620573854" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
-	<%= yield %></p>
-	</div>
-	<iframe width="640" height="360" src="http://www.youtube.com/embed/81zNjwtrfks?rel=0" frameborder="0" allowfullscreen></iframe>
 	
+		
+	<%= yield %></p>
+		</div>	
+    </div>
+
+
+	<div class="footer_bar">
+    <div class="footer_bar_nav">
+      <div class="footer_copyright">
+        © 2011 Dressora
+      </div>
+    </div>
+ 	</div>
+	
+	<%= javascript_include_tag "libs/jquery-1.6.2.min.js" %>
+	<%= javascript_include_tag "libs/jquery.colorbox-min.js" %>
+
+
+	<script>
+	  $('#save_outfit').colorbox(
+	      {
+	        html: '<h1>Outfit has been saved.</h1>'
+	      }
+	    );
+	</script>
+
+	<script>
+	  $('#open_calendar').colorbox(
+	      {
+	        html: '<img src="img/calendar.jpg" width="330" height="300" />'
+	      }
+	    );
+	</script>
+	<%= javascript_include_tag "plugins.js" %>
+	<%= javascript_include_tag "script.js" %>
 
 </body>
 </html>

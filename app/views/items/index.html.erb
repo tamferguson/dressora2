@@ -1,33 +1,84 @@
-<h1>Listing items</h1>
+<div id="main" role="main" class="border_guide clearfix">
+	<div class="upper_nav border_guide clearfix">
+		<ul class="upper_nav_buttons">
+			<li id="upload_image"><%= link_to 'Upload an Item', new_item_path %>
+			</li>
+			<li id="save_outfit">Save this Outfit</li>
+			<li id="open_calendar">Calendar</li>
+		</ul>
+	</div>
+	<div class="closet border_guide clearfix">
+		
+		<div id="dummy">
+		   	<% @tops.each do |top| %>
+			    <%= image_tag top.image.url(:thumb), {'data-item-id' => "#{top.id}"} %>
+			<% end %>
+		</div>
+			
 
-<table>
-  <tr>
-    <th>Category</th>
-    <th>Brand</th>
-    <th>Description</th>
-    <th>Size</th>
-    <th>Color</th>
-    <th>Image</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+		<div id="container">
+			<ul id="coverflow" class="top"></ul>
+		</div>
 
-<% @items.each do |item| %>
-  <tr>
-    <td><%= item.category.name %></td>
-    <td><%= item.brand %></td>
-    <td><%= item.description %></td>
-    <td><%= item.size %></td>
-    <td><%= item.color %></td>
-    <td><%= image_tag item.image.url(:thumb) %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+		<input id="left" type="button" value="&larr;" />
+		<input id="right" type="button" value="&rarr;" />
 
-<br />
+		<div id="zoom_container"></div>
 
-<%= link_to 'New Item', new_item_path %>
+    <br />
+
+		<p align="center">
+		<img src="img/pants_placeholder.jpg" />
+		</p>        
+
+		<p align="center">
+		<img src="img/shoes_placeholder.jpg" />
+		</p>
+
+    <div class="comments_box border_guide">
+      <form method="" action="">
+        <textarea rows="6" cols="46" wrap="physical" name="comments" placeholder="Enter some comments about this outfit"></textarea>
+        <input type="submit" value="Comment" style="padding: 10px;" />
+      </form>
+    </div>
+
+	</div>
+
+	<div class="ad_sidebar border_guide">
+		<strong>Recommended for You</strong>
+
+		<p align="center">
+    <img src="img/recommended_top.png" />
+    </p>
+
+		<p>
+			<strong>Amazon</strong><br />
+      Blowfish Women's Naina<br />
+      Price: $29.99 - $42.00<br />
+      <a href="">Add to cart</a>
+		</p>
+
+    <p align="center">
+    <img src="img/recommended_pants.png" />
+    </p>
+
+    <p>
+      <strong>Amazon</strong><br />
+      Blowfish Women's Naina<br />
+      Price: $29.99 - $42.00<br />
+      <a href="">Add to cart</a>
+    </p>
+
+		<p align="center">
+		<img src="img/recommended_shoe.png" />
+		</p>
+
+    <p>
+      <strong>Amazon</strong><br />
+      Blowfish Women's Naina<br />
+      Price: $29.99 - $42.00<br />
+      <a href="">Add to cart</a>
+    </p>
+	</div>
+
+</div>

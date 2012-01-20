@@ -19,5 +19,6 @@ class SessionsController < ApplicationController
     redirect_to signin_url, :notice => "You have signed out."
   end
   
+ 
 
 end

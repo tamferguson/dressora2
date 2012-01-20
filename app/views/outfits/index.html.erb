@@ -13,10 +13,22 @@
 
 <% @outfits.each do |outfit| %>
   <tr>
-    <td><%= outfit.accessory_id %></td>
-    <td><%= outfit.top_id %></td>
-    <td><%= outfit.bottom_id %></td>
-    <td><%= outfit.shoes_id %></td>
+	<%if outfit.accessory_id%>
+    <td><%= image_tag Item.find(outfit.accessory_id).image.url(:thumb)%></td>
+	<%end%>
+
+	<%if outfit.top_id%>
+    <td><%= image_tag Item.find(outfit.top_id).image.url(:thumb)  %></td>
+	<%end%>
+
+	<%if outfit.bottom_id%>
+    <td><%= image_tag Item.find(outfit.bottom_id).image.url(:thumb) %></td>
+	<%end%>
+
+	<%if outfit.shoes_id%>
+	<td><%= image_tag Item.find(outfit.shoes_id).image.url(:thumb) %></td>
+	<%end%>
+	
     <td><%= link_to 'Show', outfit %></td>
     <td><%= link_to 'Edit', edit_outfit_path(outfit) %></td>
     <td><%= link_to 'Destroy', outfit, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = current_user.items.all
+    @tops = current_user.items.select{|i| i.category.name == "Top"} 
+    @bottoms = current_user.items.select{|i| i.category.name == "Bottom"} 
+    @accessories = current_user.items.select{|i| i.category.name == "Accessory"} 
+    @shoes = current_user.items.select{|i| i.category.name == "Shoes"} 
+    #i could do Item.all and put if else for each category to do only one SQL query
 
     respond_to do |format|
       format.html # index.html.erb
@@ -90,5 +95,16 @@ class ItemsController < ApplicationController
     if !@item
       redirect_to items_url, :notice => "That's not yours!"
     end
+  end
+  
+  def fb_response
+    logger.debug "fb_response called"
+    user = User.find(session[:user_id])
+    logger.debug "user found"
+    user.fb_access_token = params["access_token"]
+    user.fb_uid = params["uid"]
+    logger.debug "DEBUG #{user.id} -- #{params["uid"]}"
+    user.save!
+    logger.debug "saved"
   end
 end

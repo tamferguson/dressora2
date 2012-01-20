@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fb user:</b>
+  <%= @request.fb_user_id %>
+</p>
+
+<p>
+  <b>Choice:</b>
+  <%= @request.choice_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

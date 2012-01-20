@@ -2,24 +2,32 @@
 
 <p>
   <b>Accessory:</b>
-  <%= @outfit.accessory_id %>
+ <%if @outfit.accessory_id%>
+ <%= image_tag Item.find(@outfit.accessory_id).image.url(:thumb) %>
+ <%end%>
 </p>
+
 
 <p>
   <b>Top:</b>
-  <%= @outfit.top_id %>
+  <%if @outfit.top_id%>
+  <%= image_tag Item.find(@outfit.top_id).image.url(:thumb) %>
+  <%end%>
 </p>
 
 <p>
   <b>Bottom:</b>
-  <%= @outfit.bottom_id %>
+  <%if @outfit.bottom_id%>
+  <%= image_tag Item.find(@outfit.bottom_id).image.url(:thumb)%>
+  <%end%>
 </p>
 
 <p>
   <b>Shoes:</b>
-  <%= @outfit.shoes_id %>
+  <%if @outfit.shoes_id%>
+  <%= image_tag Item.find(@outfit.shoes_id).image.url(:thumb)%>
+  <%end%>
 </p>
-
 
 <%= link_to 'Edit', edit_outfit_path(@outfit) %> |
 <%= link_to 'Back', outfits_path %>
